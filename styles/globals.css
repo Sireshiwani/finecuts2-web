@@ -1,0 +1,2 @@
+/* Re-export app globals for compatibility with the planned folder layout. */
+@import "../app/globals.css";
