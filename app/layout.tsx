@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   title: "Fine Cuts | Premium Grooming",
   description: "The ultimate grooming experience for the modern gentleman in Nairobi.",
   metadataBase: new URL("https://gardencityfinecuts.co.ke"),
+  icons: {
+    icon: [{ url: "/images/logo.png", type: "image/png" }],
+    apple: [{ url: "/images/logo.png", type: "image/png" }],
+  },
 };
 
 export const viewport = {

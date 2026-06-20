@@ -1,8 +1,17 @@
+import Image from "next/image";
+
 export default function HomeNav() {
   return (
     <nav className="fixed z-50 flex w-full items-center justify-between bg-gradient-to-b from-black/80 to-transparent px-8 py-6">
-      <a href="#top" className="text-gold-gradient text-2xl font-bold uppercase tracking-tighter">
-        Fine Cuts
+      <a href="#top" className="flex shrink-0 items-center">
+        <Image
+          src="/images/logo.png"
+          alt="Garden City Fine Cuts"
+          width={56}
+          height={56}
+          priority
+          className="h-11 w-11 rounded-full border border-[#D4A017]/40 object-cover sm:h-14 sm:w-14"
+        />
       </a>
       <div className="hidden gap-8 text-sm font-light uppercase tracking-widest md:flex">
         <a href="#services" className="transition hover:text-yellow-500">
