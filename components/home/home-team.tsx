@@ -19,29 +19,33 @@ export default function HomeTeam({ team }: { team: HomeTeamMember[] }) {
 
   return (
     <section id="team" className="mx-auto max-w-7xl px-8 pb-24">
-      <div className="glass-card p-10">
+      <div className="glass-card p-6 md:p-8">
         <h2 className="mb-2 text-3xl font-bold md:text-4xl">Master Barbers</h2>
         <p className="mb-8 text-gray-400">Meet the professionals shaping signature styles daily.</p>
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-flow-row grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {members.map((member, index) => {
             const photo = memberPhoto(member.photo_url, index);
             const useUnoptimized = !photo.includes("images.unsplash.com");
 
             return (
-              <div key={member.id} className="overflow-hidden rounded-2xl border border-white/10 bg-black/20">
-                <div className="relative aspect-[4/5] w-full">
+              <div
+                key={member.id}
+                className="overflow-hidden rounded-xl border border-white/10 bg-black/20"
+              >
+                <div className="relative aspect-square w-full">
                   <Image
                     src={photo}
                     alt={member.name}
                     fill
+                    sizes="(max-width: 640px) 45vw, (max-width: 1280px) 20vw, 160px"
                     unoptimized={useUnoptimized}
                     className="object-cover"
                   />
                 </div>
-                <div className="p-5">
-                  <h3 className="text-2xl">{member.name}</h3>
+                <div className="p-3 sm:p-4">
+                  <h3 className="text-base font-semibold leading-snug sm:text-lg">{member.name}</h3>
                   {member.specialty ? (
-                    <p className="mt-2 text-sm leading-relaxed text-gray-400">{member.specialty}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-gray-400 sm:text-sm">{member.specialty}</p>
                   ) : null}
                 </div>
               </div>
