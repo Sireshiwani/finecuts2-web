@@ -24,12 +24,20 @@ export default function HomeNav() {
           The Club
         </a>
       </div>
-      <a
-        href="#booking"
-        className="rounded-full bg-[#D4A017] px-6 py-2 text-xs font-bold uppercase tracking-tighter text-black transition hover:scale-105"
-      >
-        Book Now
-      </a>
+      <div className="flex shrink-0 items-center gap-3 sm:gap-4">
+        <a
+          href="/login/"
+          className="rounded-full border border-white/25 px-4 py-2 text-xs font-bold uppercase tracking-tighter text-white transition hover:border-[#D4A017] hover:text-yellow-500"
+        >
+          Login
+        </a>
+        <a
+          href="#booking"
+          className="rounded-full bg-[#D4A017] px-6 py-2 text-xs font-bold uppercase tracking-tighter text-black transition hover:scale-105"
+        >
+          Book Now
+        </a>
+      </div>
     </nav>
   );
 }
