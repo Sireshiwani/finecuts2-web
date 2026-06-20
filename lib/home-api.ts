@@ -12,8 +12,10 @@ export type HomeService = {
 export type HomeTeamMember = {
   id: number;
   name: string;
-  role: string;
   photo_url: string;
+  specialty?: string;
+  /** @deprecated API no longer sends role; kept for older payloads */
+  role?: string;
   commission_rate?: string;
 };
 
