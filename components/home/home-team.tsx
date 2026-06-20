@@ -15,14 +15,14 @@ function memberPhoto(url: string, index: number): string {
 }
 
 export default function HomeTeam({ team }: { team: HomeTeamMember[] }) {
-  const members = (team.length ? team : FALLBACK_TEAM).slice(0, 3);
+  const members = team.length ? team : FALLBACK_TEAM;
 
   return (
     <section id="team" className="mx-auto max-w-7xl px-8 pb-24">
       <div className="glass-card p-10">
         <h2 className="mb-2 text-3xl font-bold md:text-4xl">Master Barbers</h2>
         <p className="mb-8 text-gray-400">Meet the professionals shaping signature styles daily.</p>
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {members.map((member, index) => {
             const photo = memberPhoto(member.photo_url, index);
             const useUnoptimized = !photo.includes("images.unsplash.com");
