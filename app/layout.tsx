@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://gardencityfinecuts.co.ke"),
 };
 
+export const viewport = {
+  themeColor: "#0b0b0b",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
