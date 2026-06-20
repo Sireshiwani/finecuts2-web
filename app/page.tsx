@@ -4,14 +4,14 @@ import HomeNav from "@/components/home/home-nav";
 import HomeServices from "@/components/home/home-services";
 import HomeTeam from "@/components/home/home-team";
 import HomeWhatsappFab from "@/components/home/home-whatsapp-fab";
-import { getDjangoApiBase } from "@/lib/django-url";
 import type { HomeData } from "@/lib/home-api";
+import { fetchPublicHome } from "@/lib/public-home";
+
+export const dynamic = "force-dynamic";
 
 async function loadHomeData(): Promise<HomeData> {
   try {
-    const res = await fetch(`${getDjangoApiBase()}/api/public/home/`, { cache: "no-store" });
-    if (!res.ok) return { services: [], team: [] };
-    return res.json();
+    return await fetchPublicHome();
   } catch {
     return { services: [], team: [] };
   }

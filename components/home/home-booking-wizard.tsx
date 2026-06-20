@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 
 import { BookingPayload, fetchBookingOptions, submitBooking } from "@/lib/booking-api";
 import { formatKsh, HomeService, HomeTeamMember } from "@/lib/home-api";
+import { fetchPublicHome } from "@/lib/public-home";
 
 function formatFieldErrors(errors: Record<string, string[]>): string {
   return Object.entries(errors)
@@ -31,6 +32,15 @@ export default function HomeBookingWizard({ services, team }: Props) {
   const [notes, setNotes] = useState("");
 
   const [loadedServices, setLoadedServices] = useState<HomeService[]>(services);
+  const [teamMembers, setTeamMembers] = useState<HomeTeamMember[]>(team);
+
+  useEffect(() => {
+    fetchPublicHome()
+      .then((data) => {
+        if (data.team.length) setTeamMembers(data.team);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (services.length) {
@@ -88,9 +98,9 @@ export default function HomeBookingWizard({ services, team }: Props) {
   const resolveStaffId = (): number | null => {
     const trimmed = preferredBarber.trim();
     if (!trimmed) return null;
-    const byId = team.find((m) => String(m.id) === trimmed);
+    const byId = teamMembers.find((m) => String(m.id) === trimmed);
     if (byId) return byId.id;
-    const byName = team.find((m) => m.name.toLowerCase() === trimmed.toLowerCase());
+    const byName = teamMembers.find((m) => m.name.toLowerCase() === trimmed.toLowerCase());
     return byName?.id ?? null;
   };
 
@@ -245,7 +255,7 @@ export default function HomeBookingWizard({ services, team }: Props) {
                 onChange={(e) => setAppointmentTime(e.target.value)}
                 className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 outline-none focus:border-yellow-500"
               />
-              {team.length > 0 ? (
+              {teamMembers.length > 0 ? (
                 <select
                   id="preferred_barber"
                   value={preferredBarber}
@@ -253,7 +263,7 @@ export default function HomeBookingWizard({ services, team }: Props) {
                   className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 outline-none focus:border-yellow-500"
                 >
                   <option value="">Preferred Barber (Optional)</option>
-                  {team.map((m) => (
+                  {teamMembers.map((m) => (
                     <option key={m.id} value={String(m.id)}>
                       {m.name}
                     </option>
@@ -325,7 +335,7 @@ export default function HomeBookingWizard({ services, team }: Props) {
                 <p>
                   <strong>Preferred Barber:</strong>{" "}
                   {preferredBarber
-                    ? team.find((m) => String(m.id) === preferredBarber)?.name || preferredBarber
+                    ? teamMembers.find((m) => String(m.id) === preferredBarber)?.name || preferredBarber
                     : "Any available barber"}
                 </p>
                 {notes ? (
